@@ -23,5 +23,5 @@ function isArray<T = unknown>(value: unknown): value is T[];
 
 function isObject<T extends Record<string | number, any> = Record<string | number, any>>(value: unknown): value is T;
 
-function isFunction(value: unknown): value is (...args: unknown[]) => unknown;
+function isFunction<T extends (...args: unknown[]) => unknown = (...args: unknown[]) => unknown>(value: unknown): value is T;
 ```

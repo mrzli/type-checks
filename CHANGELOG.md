@@ -4,6 +4,12 @@ All notable changes to the "type-checks" will be documented in this file.
 
 ## [Unreleased]
 
+## [0.0.3] - 2023-12-31
+
+### Changed
+
+Add generic type parameter for better type casting of `isFunction` type guard.
+
 ## [0.0.2] - 2023-12-31
 
 ### Changed

@@ -35,8 +35,8 @@ export function isObject<
   );
 }
 
-export function isFunction(
-  value: unknown,
-): value is (...args: unknown[]) => unknown {
+export function isFunction<
+  T extends (...args: unknown[]) => unknown = (...args: unknown[]) => unknown,
+>(value: unknown): value is T {
   return value instanceof Function;
 }
