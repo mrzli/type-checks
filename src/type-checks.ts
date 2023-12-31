@@ -25,7 +25,7 @@ export function isArray<T = unknown>(value: unknown): value is T[] {
 
 export function isObject<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  T extends Record<string | number, any> = Record<string | number, any>
+  T extends Record<string | number, any> = Record<string | number, any>,
 >(value: unknown): value is T {
   return (
     typeof value === 'object' &&
@@ -33,4 +33,10 @@ export function isObject<
     !isArray(value) &&
     !isDate(value)
   );
+}
+
+export function isFunction(
+  value: unknown,
+): value is (...args: unknown[]) => unknown {
+  return value instanceof Function;
 }

@@ -4,6 +4,7 @@ import {
   isArray,
   isBoolean,
   isDate,
+  isFunction,
   isNumber,
   isObject,
   isString,
@@ -81,6 +82,41 @@ describe('type-checks', () => {
         input: { field: 'value' },
         expected: false,
       },
+      {
+        description: '() => {}',
+        input: (): void => {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'function() {}',
+        input: function (): void {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'async function() {}',
+        input: async function (): Promise<void> {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'function*() {}',
+        input: function* (): Iterable<number> {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'async function*() {}',
+        input: async function* (): AsyncGenerator<number> {
+          /* noop */
+        },
+        expected: false,
+      },
     ];
 
     for (const example of EXAMPLES) {
@@ -154,6 +190,41 @@ describe('type-checks', () => {
       {
         description: "{ field: 'value' }",
         input: { field: 'value' },
+        expected: false,
+      },
+      {
+        description: '() => {}',
+        input: (): void => {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'function() {}',
+        input: function (): void {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'async function() {}',
+        input: async function (): Promise<void> {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'function*() {}',
+        input: function* (): Iterable<number> {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'async function*() {}',
+        input: async function* (): AsyncGenerator<number> {
+          /* noop */
+        },
         expected: false,
       },
     ];
@@ -231,6 +302,41 @@ describe('type-checks', () => {
         input: { field: 'value' },
         expected: false,
       },
+      {
+        description: '() => {}',
+        input: (): void => {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'function() {}',
+        input: function (): void {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'async function() {}',
+        input: async function (): Promise<void> {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'function*() {}',
+        input: function* (): Iterable<number> {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'async function*() {}',
+        input: async function* (): AsyncGenerator<number> {
+          /* noop */
+        },
+        expected: false,
+      },
     ];
 
     for (const example of EXAMPLES) {
@@ -304,6 +410,41 @@ describe('type-checks', () => {
       {
         description: "{ field: 'value' }",
         input: { field: 'value' },
+        expected: false,
+      },
+      {
+        description: '() => {}',
+        input: (): void => {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'function() {}',
+        input: function (): void {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'async function() {}',
+        input: async function (): Promise<void> {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'function*() {}',
+        input: function* (): Iterable<number> {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'async function*() {}',
+        input: async function* (): AsyncGenerator<number> {
+          /* noop */
+        },
         expected: false,
       },
     ];
@@ -381,6 +522,41 @@ describe('type-checks', () => {
         input: { field: 'value' },
         expected: false,
       },
+      {
+        description: '() => {}',
+        input: (): void => {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'function() {}',
+        input: function (): void {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'async function() {}',
+        input: async function (): Promise<void> {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'function*() {}',
+        input: function* (): Iterable<number> {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'async function*() {}',
+        input: async function* (): AsyncGenerator<number> {
+          /* noop */
+        },
+        expected: false,
+      },
     ];
 
     for (const example of EXAMPLES) {
@@ -456,11 +632,156 @@ describe('type-checks', () => {
         input: { field: 'value' },
         expected: true,
       },
+      {
+        description: '() => {}',
+        input: (): void => {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'function() {}',
+        input: function (): void {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'async function() {}',
+        input: async function (): Promise<void> {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'function*() {}',
+        input: function* (): Iterable<number> {
+          /* noop */
+        },
+        expected: false,
+      },
+      {
+        description: 'async function*() {}',
+        input: async function* (): AsyncGenerator<number> {
+          /* noop */
+        },
+        expected: false,
+      },
     ];
 
     for (const example of EXAMPLES) {
       it(example.description, () => {
         const actual = isObject(example.input);
+        expect(actual).toEqual(example.expected);
+      });
+    }
+  });
+
+  describe('isFunction()', () => {
+    const EXAMPLES: readonly Example[] = [
+      { description: 'undefined', input: undefined, expected: false },
+      { description: 'null', input: null, expected: false },
+      { description: '0', input: 0, expected: false },
+      { description: '1', input: 1, expected: false },
+      { description: '-1', input: -1, expected: false },
+      { description: '5.5', input: 5.5, expected: false },
+      { description: '1_000_000', input: 1_000_000, expected: false },
+      { description: '1e12', input: 1e12, expected: false },
+      { description: "Number('6.7')", input: Number('6.7'), expected: false },
+      {
+        description: 'Number.MIN_VALUE',
+        input: Number.MIN_VALUE,
+        expected: false,
+      },
+      {
+        description: 'Number.MAX_VALUE',
+        input: Number.MAX_VALUE,
+        expected: false,
+      },
+      {
+        description: 'Number.MIN_SAFE_INTEGER',
+        input: Number.MIN_SAFE_INTEGER,
+        expected: false,
+      },
+      {
+        description: 'Number.MAX_SAFE_INTEGER',
+        input: Number.MAX_SAFE_INTEGER,
+        expected: false,
+      },
+      {
+        description: 'Number.POSITIVE_INFINITY',
+        input: Number.POSITIVE_INFINITY,
+        expected: false,
+      },
+      {
+        description: 'Number.NEGATIVE_INFINITY',
+        input: Number.NEGATIVE_INFINITY,
+        expected: false,
+      },
+      { description: 'NaN', input: NaN, expected: false },
+      { description: "''", input: '', expected: false },
+      { description: "'some string'", input: 'some string', expected: false },
+      { description: 'String(11)', input: String(11), expected: false },
+      { description: 'false', input: false, expected: false },
+      { description: 'true', input: true, expected: false },
+      {
+        description: "Boolean('true')",
+        input: Boolean('true'),
+        expected: false,
+      },
+      { description: 'new Date()', input: new Date(), expected: false },
+      { description: '[]', input: [], expected: false },
+      {
+        description: '[1, 2, 3]',
+        input: [1, 2, 3],
+        expected: false,
+      },
+      { description: '{}', input: {}, expected: false },
+      {
+        description: "{ field: 'value' }",
+        input: { field: 'value' },
+        expected: false,
+      },
+      {
+        description: '() => {}',
+        input: (): void => {
+          /* noop */
+        },
+        expected: true,
+      },
+      {
+        description: 'function() {}',
+        input: function (): void {
+          /* noop */
+        },
+        expected: true,
+      },
+      {
+        description: 'async function() {}',
+        input: async function (): Promise<void> {
+          /* noop */
+        },
+        expected: true,
+      },
+      {
+        description: 'function*() {}',
+        input: function* (): Iterable<number> {
+          /* noop */
+        },
+        expected: true,
+      },
+      {
+        description: 'async function*() {}',
+        input: async function* (): AsyncGenerator<number> {
+          /* noop */
+        },
+        expected: true,
+      },
+    ];
+
+    for (const example of EXAMPLES) {
+      it(example.description, () => {
+        const actual = isFunction(example.input);
         expect(actual).toEqual(example.expected);
       });
     }
