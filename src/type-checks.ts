@@ -36,7 +36,8 @@ export function isObject<
 }
 
 export function isFunction<
-  T extends (...args: unknown[]) => unknown = (...args: unknown[]) => unknown,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  T extends (...args: any[]) => any = (...args: any[]) => any,
 >(value: unknown): value is T {
   return value instanceof Function;
 }
